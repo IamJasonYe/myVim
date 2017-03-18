@@ -10,32 +10,36 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
+"Syntax
+Plugin 'octol/vim-cpp-enhanced-highlight'
+"Indention
+Plugin 'vim-scripts/google.vim'
 
 "html
 "  isnowfy only compatible with python not python3
-Plugin 'isnowfy/python-vim-instant-markdown'
-Plugin 'jtratner/vim-flavored-markdown'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'nelstrom/vim-markdown-preview'
+"Plugin 'JamshedVesuna/vim-markdown-preview'
 "python sytax checker
-Plugin 'nvie/vim-flake8'
-Plugin 'vim-scripts/Pydiction'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'scrooloose/syntastic'
+"Plugin 'nvie/vim-flake8'
+"Plugin 'vim-scripts/Pydiction'
+"Plugin 'vim-scripts/indentpython.vim'
+"Plugin 'scrooloose/syntastic'
 
 "auto-completion stuff
 "Plugin 'klen/python-mode'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'klen/rope-vim'
+"Plugin 'klen/rope-vim'
 "Plugin 'davidhalter/jedi-vim'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 ""code folding
 " Plugin 'tmhedberg/SimpylFold'
 Plugin 'Efficient-python-folding'
 "Colors!!!
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jnurmine/Zenburn'
-
+Plugin 'zanglg/nova.vim'
+"Plugin 'davb5/wombat256dave'
+Plugin 'vim-scripts/wombat256.vim'
+Plugin 'sickill/vim-monokai'
 call vundle#end()
 
 filetype plugin indent on    " enables filetype detection
@@ -43,10 +47,12 @@ let g:SimpylFold_docstring_preview = 1
 
 "autocomplete
 let g:ycm_autoclose_preview_window_after_completion=1
-
+let g:ycm_global_ycm_extra_conf='/home/jason/.ycm_extra_conf.py'
+let g:ycm_warning_symbol = '))'
+"let g:ycm_filepath_completion_use_working_dir=1
 "custom keys
 let mapleader=","
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "
 call togglebg#map("<F5>")
 "colorscheme zenburn
@@ -110,6 +116,14 @@ syntax on
 " Keep indentation level from previous line:
 autocmd FileType python set autoindent
 
+" Indention of Cpp
+" show existing tab with 4 spaces width
+autocmd FileType cpp set tabstop=4
+" when indenting with '>', use 4 spaces width
+autocmd FileType cpp set shiftwidth=4
+" On pressing tab, insert 4 spaces
+autocmd FileType cpp set expandtab 
+
 " make backspaces more powerfull
 set backspace=indent,eol,start
 
@@ -120,7 +134,7 @@ autocmd FileType python set foldmethod=indent
 set foldmethod=indent
 set foldlevel=99
 "use space to open folds
-nnoremap <space> za 
+"nnoremap <space> za
 "----------Stop python PEP 8 stuff--------------
 
 "js stuff"
@@ -187,7 +201,7 @@ set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
 " Settings for python-mode
-map <Leader>g :call RopeGotoDefinition()<CR>
+"map <Leader>g :call RopeGotoDefinition()<CR>
 let ropevim_enable_shortcuts = 1
 let g:pymode_rope_goto_def_newwin = "vnew"
 let g:pymode_rope_extended_complete = 1
@@ -200,17 +214,17 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-set completeopt=longest,menuone
-function! OmniPopup(action)
-  if pumvisible()
-    if a:action == 'j'
-      return "\<C-N>"
-    elseif a:action == 'k'
-      return "\<C-P>"
-    endif
-  endif
-  return a:action
-endfunction
+"set completeopt=longest,menuone
+"function! OmniPopup(action)
+"  if pumvisible()
+"    if a:action == 'j'
+"      return "\<C-N>"
+"    elseif a:action == 'k'
+"      return "\<C-P>"
+"    endif
+"  endif
+"  return a:action
+"endfunction
 
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
@@ -227,9 +241,18 @@ autocmd VimEnter * wincmd p
 " paste toggle
 set pastetoggle=<F2>
 
-if has('gui_running')
-  set background=dark
-  colorscheme solarized
-else
-  colorscheme zenburn
-endif
+"if has('gui_running')
+"  set background=dark
+"  colorscheme nova 
+"else
+"  colorscheme nova 
+"endif
+
+"Syntax setting
+"vim-cpp-enhanced-highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_concepts_highlight = 1
+set background=dark
+set t_Co=256
+colorscheme wombat256mod 
