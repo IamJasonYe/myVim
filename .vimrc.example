@@ -49,6 +49,7 @@ let g:SimpylFold_docstring_preview = 1
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_global_ycm_extra_conf='/home/jason/.ycm_extra_conf.py'
 let g:ycm_warning_symbol = '))'
+let g:ycm_server_python_interpreter='/usr/bin/python'
 "let g:ycm_filepath_completion_use_working_dir=1
 "custom keys
 let mapleader=","
@@ -67,16 +68,16 @@ set noswapfile
 set nu
 
 "python with virtualenv support
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUA_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  sys.path.insert(0, project_base_dir)
-  activate_this = os.path.join(project_base_dir,'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
+"py << EOF
+"import os.path
+"import sys
+"import vim
+"if 'VIRTUA_ENV' in os.environ:
+"  project_base_dir = os.environ['VIRTUAL_ENV']
+"  sys.path.insert(0, project_base_dir)
+"  activate_this = os.path.join(project_base_dir,'bin/activate_this.py')
+"  execfile(activate_this, dict(__file__=activate_this))
+"EOF
 
 "it would be nice to set tag files by the active virtualenv here
 ":set tags=~/mytags "tags for ctags and taglist
@@ -202,15 +203,15 @@ set wildignore+=*/coverage/*
 
 " Settings for python-mode
 "map <Leader>g :call RopeGotoDefinition()<CR>
-let ropevim_enable_shortcuts = 1
-let g:pymode_rope_goto_def_newwin = "vnew"
-let g:pymode_rope_extended_complete = 1
-let g:pymode_breakpoint = 0
-let g:pymode_syntax = 1
-let g:pymode_syntax_builtin_objs = 0
-let g:pymode_syntax_builtin_funcs = 0
-let g:pymode_rope_lookup_project = 0
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+"let ropevim_enable_shortcuts = 1
+"let g:pymode_rope_goto_def_newwin = "vnew"
+"let g:pymode_rope_extended_complete = 1
+"let g:pymode_breakpoint = 0
+"let g:pymode_syntax = 1
+"let g:pymode_syntax_builtin_objs = 0
+"let g:pymode_syntax_builtin_funcs = 0
+"let g:pymode_rope_lookup_project = 0
+"map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
